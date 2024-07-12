@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizzz</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined">
+  <style>
+    /* Reset default margin and padding */
+    body, h1, h2, h3, h5 {
+      margin: 0;
+      padding: 0;
+      background-color: #ddffd3;
+    }
+
+    /* Center title */
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: rgb(185, 255, 212);
+      letter-spacing: 5px;
+      color: #00b93e;
+    }
+
+    /* Center quiz content */
+    #app {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px; /* Adjust margin as needed */
+      height: 90vh; /* Full viewport height */
+    }
+
+    /* Quiz container */
+    #quizContainer {
+      position: relative;
+      width: 90%; /* Adjust width as needed */
+      max-width: 600px; /* Example maximum width */
+      border: 1px solid #ccc; /* Example border */
+      padding: 20px; /* Example padding */
+      margin-bottom: 10px; /* Example margin */
+      border-radius: 10px;
+      background-color: rgba(255, 139, 139, 0);
+      color: white;
+    
+    }
+
+    /* Quiz question */
+    .quiz-question {
+      margin-bottom: 20px; /* Example margin */
+      margin-left: 15px;
+      margin-right: 15px;
+      color: black;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    /* Quiz options */
+    .quiz-options {
+      display: flex;
+      flex-direction: column; /* Stack options */
+      gap: 10px; /* Example gap between options */
+      margin-top: 15px;
+    }
+
+    /* Option button */
+    .btn {
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #003807;
+      cursor: pointer;
+      color: white;
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
+      text-transform: uppercase;
+    }
+
+    .btn.selected {
+      background-color: #66ff99; /* Highlight selected option */
+      border-radius: 50px;
+      color: rgb(0, 105, 40);
+      border: 1px solid #006f25;
+    }
+
+    .btn:hover {
+      background-color: #c0ffd5; /* Highlight selected option */
+      border-radius: 30px;
+      color: rgb(0, 105, 40);
+    }
+
+    /* Final score */
+    .final-score {
+      text-align: center;
+    }
+
+    /* Positioning elements */
+    #score {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      visibility: hidden
+    }
+
+   
+
+    #confirmButton {
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #6fff00;
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
+      text-transform: uppercase;
+      position: relative;
+  
+      margin-top: 10px;
+    }
+
+    #confirmButton.selected {
+      background-color: #6fff0092;
+     
+
+      border-radius: 50px;
+      color: rgb(255, 255, 255);
+      border: 1px solid #006f25;
+    }
+
+    #confirmButton:hover {
+      background-color: #6fff0048;
+
+
+      border-radius: 30px;
+      color: rgb(0, 0, 0);
+    }
+
+    #questionCount {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      color: #009632;
+      font-weight: bold;
+    }
+
+    .fin{
+      color: black;
+      font-weight: bolder;
+      color: #009632;
+      font-size: 30px;
+      text-transform: uppercase ;
+    }
+
+    .fin2{
+      color: black;
+      font-weight: bolder;
+      color: #009632;
+      font-size: 16px;
+      text-transform: uppercase ;
+    }
+
+    @media (max-width: 768px) {
+      /* Adjustments for smaller screens */
+      .title {
+        font-size: 1.5rem;
+      }
+
+      #quizContainer {
+        width: 85%; /* Full width for smaller screens */
+      }
+
+      button {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+
+      .quiz-question {
+        margin-bottom: 20px; /* Example margin */
+        margin-left: 15px;
+        margin-right: 15px;
+        color: black;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+  
+      .fin{
+        color: black;
+        font-weight: bolder;
+        color: #009632;
+        font-size: 30px;
+        text-transform: uppercase ;
+      }
+
+      .fin2{
+        color: black;
+        font-weight: bolder;
+        color: #009632;
+        font-size: 16px;
+        text-transform: uppercase ;
+
+        #questionCount {
+          position: absolute;
+          top: -105px;
+          left: 10px;
+          color: #009632;
+          font-weight: bold;
+        }
+      }
+
+      body {
+        background-color: #fff;
+        margin: 0;
+        overflow: hidden;
+    }
+    
+    #drawing_canvas {
+        position: absolute;
+        margin: auto;
+        width: 512px;
+        height: 350px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    } 
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">Quizzzz</h1>
+
+  <div id="app">
+    <div id="quizContainer">
+      <!-- Quiz questions will be loaded here dynamically -->
+    </div>
+    <div id="score">Score: <span id="scoreValue">0</span></div>
+    <div id="endCard" style="display: none;"></div>
+  </div>
+
+  <!-- Include Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database-compat.js"></script>
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd1hHYd-GmINKv0l0qwi_10udbiLsTeX0",
+      authDomain: "quizzz-998c0.firebaseapp.com",
+      projectId: "quizzz-998c0",
+      storageBucket: "quizzz-998c0.appspot.com",
+      messagingSenderId: "320059830331",
+      appId: "1:320059830331:web:221f1eebb6e363cc78ac1e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    // Firebase Database reference
+    const database = firebase.database();
+
+    // Global variables
+    let questionIndex = 0;
+    let totalQuestions = 0;
+    let selectedOption = null;
+    let questions = [];
+    let score = 0;
+    let playerName = '';
+
+    // Function to load quiz questions
+    function loadQuizQuestions() {
+      const quizContainer = document.getElementById('quizContainer');
+      const questionCountElement = document.getElementById('questionCount');
+
+      // Ask for player's name
+      playerName = prompt('Enter your name:');
+
+      // Firebase Database reference to 'questions' node
+      const questionsRef = database.ref('questions');
+
+      questionsRef.once('value', function(snapshot) {
+        questions = snapshot.val();
+        totalQuestions = Object.keys(questions).length;
+
+        // Show quiz container
+        quizContainer.style.display = 'block';
+
+        // Display initial question
+        displayQuestion();
+
+        // Update question count
+        updateQuestionCount();
+
+      }).catch(error => {
+        console.error('Error fetching questions:', error);
+      });
+    }
+
+    // Function to display a question
+    function displayQuestion() {
+      const quizContainer = document.getElementById('quizContainer');
+
+      // Clear previous question
+      quizContainer.innerHTML = '';
+
+      // Get current question data
+      const currentQuestion = questions[Object.keys(questions)[questionIndex]];
+      const questionId = Object.keys(questions)[questionIndex];
+
+      // Handle both array and object structure for options
+      let options = [];
+      if (Array.isArray(currentQuestion.options)) {
+        options = currentQuestion.options;
+      } else if (typeof currentQuestion.options === 'object') {
+        options = Object.values(currentQuestion.options);
+      } else {
+        console.error(`Options for question ${questionId} is not an array or object:`, currentQuestion.options);
+        return; // Skip this question if options is neither array nor object
+      }
+
+      // Create quiz question elements
+      const questionElement = document.createElement('div');
+      questionElement.classList.add('quiz-question');
+      questionElement.innerHTML = `
+    <div id="questionCount"><h5>Loading...</h5></div>
+
+        <h3>${currentQuestion.question}</h3>
+        <div class="quiz-options">
+        
+          ${options.map(option => `<button class="btn" onclick="selectOption('${option}')" data-question-id="${questionId}">${option}</button>`).join('')}
+        </div>
+    <button id="confirmButton" onclick="confirmAnswer()">Confirm</button>
+
+      `;
+
+      quizContainer.appendChild(questionElement);
+    }
+
+    // Function to select an option
+    function selectOption(option) {
+      // Deselect previously selected option
+      if (selectedOption) {
+        selectedOption.classList.remove('selected');
+      }
+
+      // Highlight selected option
+      selectedOption = event.target;
+      selectedOption.classList.add('selected');
+    }
+
+    // Function to confirm selected answer
+    function confirmAnswer() {
+      if (!selectedOption) {
+        return; // No option selected, do nothing
+      }
+
+      const questionId = selectedOption.getAttribute('data-question-id');
+
+      // Firebase Database reference to 'questions' node
+      const questionsRef = database.ref('questions/' + questionId);
+
+      questionsRef.once('value', function(snapshot) {
+        const questionData = snapshot.val();
+
+        // Check if questionData is null or undefined
+        if (!questionData) {
+          console.error(`Question with ID ${questionId} not found.`);
+          return;
+        }
+
+        const correctOption = questionData.correctOption;
+
+        if (selectedOption.textContent.trim() === questionData.options[correctOption]) {
+          // Update score
+          score++;
+          document.getElementById('scoreValue').textContent = score;
+        }
+
+        // Clear selection for next question
+        selectedOption.classList.remove('selected');
+        selectedOption = null;
+
+        // Move to the next question or end the game
+        questionIndex++;
+        if (questionIndex < totalQuestions) {
+          displayQuestion();
+          updateQuestionCount();
+        } else {
+          // End of questions, show final score
+          showFinalScore();
+        }
+      }).catch(error => {
+        console.error('Error fetching question:', error);
+      });
+    }
+
+    // Function to update question count
+    function updateQuestionCount() {
+      const questionCountElement = document.getElementById('questionCount');
+      questionCountElement.textContent = `Question ${questionIndex + 1}/${totalQuestions}`;
+    }
+
+   // Function to show final score
+function showFinalScore() {
+  // Check if already showing final score
+  const quizContainer = document.getElementById('quizContainer');
+  if (quizContainer.querySelector('.final-score')) {
+    return; // If final score is already displayed, do nothing
+  }
+
+  // Option 1: Using finalScoreElement
+  const finalScoreElement = document.createElement('div');
+  finalScoreElement.classList.add('final-score');
+  finalScoreElement.innerHTML = `
+    <h2 class="fin">Quiz Completed!</h2>
+    <p class="fin2">Thank you ${playerName}</p>
+    <canvas id="drawing_canvas"></canvas>vv
+  `;
+  quizContainer.innerHTML = ''; // Clear quiz container
+  quizContainer.appendChild(finalScoreElement);
+
+  // Hide unnecessary elements
+  const scoreElement = document.getElementById('scoreValue');
+  if (scoreElement) {
+    scoreElement.style.display = 'none'; // Hide score display
+  }
+
+  const confirmButton = document.getElementById('confirmButton');
+  if (confirmButton) {
+    confirmButton.style.display = 'none'; // Hide confirm button
+  }
+
+  const questionCount = document.getElementById('questionCount');
+  if (questionCount) {
+    questionCount.style.display = 'none'; // Hide question count
+  }
+
+  // Save player name and score to Firebase
+  saveResult(playerName, score);
+
+  // Option 2: Using endCard
+  /*
+  const endCard = document.getElementById('endCard');
+  if (endCard) {
+    endCard.style.display = 'block';
+    endCard.innerHTML = `
+      <h3>Player: ${playerName}</h3>
+      <p>Thank you for playing!</p>
+    `;
+  }
+  */
+}
+
+
+    // Function to save result to Firebase
+    function saveResult(playerName, score) {
+      // Firebase Database reference to 'results' node
+      const resultsRef = database.ref('results');
+
+      // Push new result entry to Firebase
+      resultsRef.push({
+        playerName: playerName,
+        score: score,
+        totalQuestions: totalQuestions,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+      }).then(() => {
+        console.log('Result saved successfully.');
+      }).catch(error => {
+        console.error('Error saving result:', error);
+      });
+    }
+
+    // Load quiz questions when the page loads
+    window.onload = function() {
+      loadQuizQuestions();
+    };
+
+  </script>
+</body>
+</html>

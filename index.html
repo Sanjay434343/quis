@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizzzz</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined">
+  
+  <style>
+    /* Basic styles */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #ddffd3;
+    }
+    
+  
+    
+    #app {
+      text-align: center;
+    }
+    
+    a {
+      margin: 5px;
+      padding: 40px 40px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #ffffff;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: rgba(0, 255, 98, 0.638);
+      transition: 1s ease-in-out;
+      position: relative;
+      display: block; /* Change from inline-block to block */
+      width: 200px; /* Example width */
+      text-transform: uppercase;
+      border-radius: 10px;
+      font-weight: bold;
+
+    }
+    
+    a:hover {
+      background-color: rgb(158, 255, 195);
+      border: 1px solid rgb(0, 255, 98);
+      color: rgb(0, 105, 40);
+      font-weight: 500;
+      border-radius: 100px;
+      font-weight: bold;
+
+    }
+    
+    #gameModes {
+      margin-top: 20px;
+    }
+    
+    .title {
+  
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: rgb(185, 255, 212);
+      letter-spacing: 5px;
+      color: #00b93e;
+    }
+    
+    .material-icons-outlined {
+      font-size: 100px; /* Set the size to 100px */
+      position: absolute;
+      color: #ffffff;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    
+    .material-icons-outlined.float {
+      animation: floatIcon 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes floatIcon {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <span class="material-icons-outlined float">question_answer</span>
+    <h1 class="title">Quizzz</h1>
+    <div id="map">
+      <!-- Map and quiz game interface will go here -->
+    </div>
+    <div id="gameModes">
+      <a href="game.html" onclick="navigateWithDelay(event, 'single-player.html')">Start Now</a>
+    </div>
+   
+  <script>  
+    function navigateWithDelay(event, targetUrl) {
+      event.preventDefault(); // Prevent the default navigation
+      setTimeout(function() {
+        window.location.href = targetUrl; // Navigate to the target URL after 2 seconds
+      }, 2000); // 2000 milliseconds = 2 seconds
+    }
+  </script>
+</body>
+</html>

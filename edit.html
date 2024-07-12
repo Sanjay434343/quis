@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Questions</title>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px;
+      max-width: 1500px;
+      background-color: #f9f9f9;
+    }
+    .options {
+      margin-top: 5px;
+    }
+    .option {
+      margin-bottom: 5px;
+    }
+    .btn {
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      padding-top: 60px; /* Place content at top */
+    }
+
+    /* Modal content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto; /* 5% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Close button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    /* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black with opacity */
+  }
+  
+  /* Modal content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top, centered horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 5px;
+  }
+  
+  /* Close button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+ /* Text box styles */
+.modal-content input[type="text"],
+.modal-content textarea,
+.modal-content select {
+  width: calc(100% - 20px); /* Adjust width */
+  padding: 8px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-content label {
+  margin-top: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+#saveChanges{
+    background-color: blue;
+    border: 1px solid #ffffff;
+    padding: 10px 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.4s ease-in-out;
+}
+
+#saveChanges:hover{
+    background-color: rgb(0, 0, 216);
+    border: 3px solid #001a6f94;
+    padding: 10px 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+  </style>
+</head>
+<body>
+  <div id="questionList"></div>
+
+  <!-- Modal for editing questions -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Edit Question</h2>
+      <input type="hidden" id="editQuestionKey">
+      <input type="text" id="editQuestionText" placeholder="Enter new question">
+      
+      <!-- Options editing section -->
+      <div id="editOptions">
+        <p><strong>Options:</strong></p>
+        <div id="optionInputs">
+          <!-- Option inputs will be populated dynamically -->
+        </div>
+      </div>
+
+      <label for="correctOption">Select Correct Option:</label>
+      <select id="correctOption">
+        <!-- Options will be populated dynamically -->
+      </select>
+      <button id="saveChanges">Save Changes</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBd1hHYd-GmINKv0l0qwi_10udbiLsTeX0",
+        authDomain: "quizzz-998c0.firebaseapp.com",
+        projectId: "quizzz-998c0",
+        storageBucket: "quizzz-998c0.appspot.com",
+        messagingSenderId: "320059830331",
+        appId: "1:320059830331:web:221f1eebb6e363cc78ac1e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Function to fetch and display questions
+    function displayQuestions() {
+      const questionListDiv = document.getElementById('questionList');
+
+      // Fetch questions from Firebase
+      database.ref('/questions').once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          const questionKey = childSnapshot.key;
+          const questionData = childSnapshot.val();
+
+          // Create HTML for each question card
+          const cardDiv = document.createElement('div');
+          cardDiv.classList.add('card');
+
+          // Question text
+          const questionText = document.createElement('p');
+          questionText.textContent = questionData.question;
+          cardDiv.appendChild(questionText);
+
+          // Options
+          const optionsDiv = document.createElement('div');
+          optionsDiv.classList.add('options');
+          for (const optionKey in questionData.options) {
+            if (questionData.options.hasOwnProperty(optionKey)) {
+              const optionText = document.createElement('p');
+              optionText.textContent = `${optionKey}: ${questionData.options[optionKey]}`;
+              optionsDiv.appendChild(optionText);
+            }
+          }
+          cardDiv.appendChild(optionsDiv);
+
+          // Correct option indicator
+          const correctOptionText = document.createElement('p');
+          correctOptionText.textContent = `Correct Option: ${questionData.correctOption}`;
+          cardDiv.appendChild(correctOptionText);
+
+          // Edit and Delete buttons
+          const editBtn = document.createElement('button');
+          editBtn.classList.add('btn');
+          editBtn.textContent = 'Edit';
+          editBtn.addEventListener('click', () => {
+            // Populate modal with current question data
+            document.getElementById('editQuestionKey').value = questionKey;
+            document.getElementById('editQuestionText').value = questionData.question;
+
+            // Clear previous options and populate current options
+            const editOptionsDiv = document.getElementById('editOptions');
+            editOptionsDiv.innerHTML = '';
+            
+            // Create input fields for each option
+            for (let i = 1; i <= 4; i++) {
+              const optionLabel = document.createElement('label');
+              optionLabel.textContent = `Option ${i}: `;
+              const optionInput = document.createElement('input');
+              optionInput.type = 'text';
+              optionInput.value = questionData.options[`option${i}`] || '';
+              optionInput.dataset.option = `option${i}`;
+              editOptionsDiv.appendChild(optionLabel);
+              editOptionsDiv.appendChild(optionInput);
+              editOptionsDiv.appendChild(document.createElement('br'));
+            }
+
+            // Populate correct options dropdown
+            const correctOptionSelect = document.getElementById('correctOption');
+            correctOptionSelect.innerHTML = '';
+            for (let i = 1; i <= 4; i++) {
+              const option = document.createElement('option');
+              option.value = `option${i}`;
+              option.textContent = `Option ${i}`;
+              if (`option${i}` === questionData.correctOption) {
+                option.selected = true;
+              }
+              correctOptionSelect.appendChild(option);
+            }
+
+            // Open the modal
+            document.getElementById('editModal').style.display = 'block';
+          });
+          cardDiv.appendChild(editBtn);
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.classList.add('btn');
+          deleteBtn.textContent = 'Delete';
+          deleteBtn.addEventListener('click', () => {
+            // Delete question from Firebase
+            database.ref('/questions/' + questionKey).remove();
+            // Remove card from UI
+            cardDiv.remove();
+          });
+          cardDiv.appendChild(deleteBtn);
+
+          // Append card to question list div
+          questionListDiv.appendChild(cardDiv);
+        });
+      });
+    }
+
+    // Call the function to display questions
+    displayQuestions();
+
+    // Save changes button functionality
+    document.getElementById('saveChanges').addEventListener('click', () => {
+      const questionKey = document.getElementById('editQuestionKey').value;
+      const newQuestionText = document.getElementById('editQuestionText').value;
+      const newOptions = {};
+      const optionInputs = document.querySelectorAll('#editOptions input');
+      optionInputs.forEach(input => {
+        const optionKey = input.dataset.option;
+        const optionValue = input.value;
+        newOptions[optionKey] = optionValue;
+      });
+      const newCorrectOption = document.getElementById('correctOption').value;
+
+      // Update question and options in Firebase
+      const updates = {
+        question: newQuestionText,
+        options: newOptions,
+        correctOption: newCorrectOption
+      };
+      database.ref('/questions/' + questionKey).update(updates);
+
+      // Close the modal
+      document.getElementById('editModal').style.display = 'none';
+
+      // Clear previous questions and display updated list
+      const questionListDiv = document.getElementById('questionList');
+      questionListDiv.innerHTML = '';
+      displayQuestions();
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('editModal');
+    const span = document.getElementsByClassName('close')[0];
+    span.onclick = function() {
+      modal.style.display = 'none';
+    };
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>

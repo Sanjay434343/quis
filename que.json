@@ -1,0 +1,475 @@
+{
+    "questions": {
+      "q1a2b3c4d": {
+        "question": "What is the capital of France?",
+        "options": {
+          "option1": "Berlin",
+          "option2": "Madrid",
+          "option3": "Paris",
+          "option4": "Lisbon"
+        },
+        "correctOption": "option3"
+      },
+      "q2b3c4d5e": {
+        "question": "Which planet is known as the Red Planet?",
+        "options": {
+          "option1": "Earth",
+          "option2": "Mars",
+          "option3": "Jupiter",
+          "option4": "Saturn"
+        },
+        "correctOption": "option2"
+      },
+      "q3c4d5e6f": {
+        "question": "What is the largest ocean on Earth?",
+        "options": {
+          "option1": "Atlantic Ocean",
+          "option2": "Indian Ocean",
+          "option3": "Arctic Ocean",
+          "option4": "Pacific Ocean"
+        },
+        "correctOption": "option4"
+      },
+      "q4d5e6f7g": {
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "options": {
+          "option1": "Mark Twain",
+          "option2": "William Shakespeare",
+          "option3": "Charles Dickens",
+          "option4": "Jane Austen"
+        },
+        "correctOption": "option2"
+      },
+      "q5e6f7g8h": {
+        "question": "What is the chemical symbol for water?",
+        "options": {
+          "option1": "O2",
+          "option2": "H2O",
+          "option3": "CO2",
+          "option4": "NaCl"
+        },
+        "correctOption": "option2"
+      },
+      "q6f7g8h9i": {
+        "question": "Who painted the Mona Lisa?",
+        "options": {
+          "option1": "Vincent van Gogh",
+          "option2": "Pablo Picasso",
+          "option3": "Leonardo da Vinci",
+          "option4": "Claude Monet"
+        },
+        "correctOption": "option3"
+      },
+      "q7g8h9i0j": {
+        "question": "What is the smallest planet in our solar system?",
+        "options": {
+          "option1": "Mercury",
+          "option2": "Venus",
+          "option3": "Mars",
+          "option4": "Neptune"
+        },
+        "correctOption": "option1"
+      },
+      "q8h9i0j1k": {
+        "question": "What is the speed of light?",
+        "options": {
+          "option1": "300,000 km/s",
+          "option2": "150,000 km/s",
+          "option3": "400,000 km/s",
+          "option4": "250,000 km/s"
+        },
+        "correctOption": "option1"
+      },
+      "q9i0j1k2l": {
+        "question": "Who developed the theory of relativity?",
+        "options": {
+          "option1": "Isaac Newton",
+          "option2": "Albert Einstein",
+          "option3": "Galileo Galilei",
+          "option4": "Niels Bohr"
+        },
+        "correctOption": "option2"
+      },
+      "qa0b1c2d3": {
+        "question": "What is the largest planet in our solar system?",
+        "options": {
+          "option1": "Earth",
+          "option2": "Mars",
+          "option3": "Jupiter",
+          "option4": "Saturn"
+        },
+        "correctOption": "option3"
+      },
+      "qb1c2d3e4": {
+        "question": "What is the hardest natural substance on Earth?",
+        "options": {
+          "option1": "Gold",
+          "option2": "Iron",
+          "option3": "Diamond",
+          "option4": "Platinum"
+        },
+        "correctOption": "option3"
+      },
+      "qc2d3e4f5": {
+        "question": "Who is known as the Father of Computers?",
+        "options": {
+          "option1": "Charles Babbage",
+          "option2": "Alan Turing",
+          "option3": "John von Neumann",
+          "option4": "Bill Gates"
+        },
+        "correctOption": "option1"
+      },
+      "qd3e4f5g6": {
+        "question": "What is the capital of Japan?",
+        "options": {
+          "option1": "Seoul",
+          "option2": "Beijing",
+          "option3": "Bangkok",
+          "option4": "Tokyo"
+        },
+        "correctOption": "option4"
+      },
+      "qe4f5g6h7": {
+        "question": "What is the largest mammal?",
+        "options": {
+          "option1": "Elephant",
+          "option2": "Blue Whale",
+          "option3": "Giraffe",
+          "option4": "Hippopotamus"
+        },
+        "correctOption": "option2"
+      },
+      "qf5g6h7i8": {
+        "question": "Who invented the telephone?",
+        "options": {
+          "option1": "Alexander Graham Bell",
+          "option2": "Thomas Edison",
+          "option3": "Nikola Tesla",
+          "option4": "Guglielmo Marconi"
+        },
+        "correctOption": "option1"
+      },
+      "qg6h7i8j9": {
+        "question": "What is the capital of Canada?",
+        "options": {
+          "option1": "Toronto",
+          "option2": "Vancouver",
+          "option3": "Ottawa",
+          "option4": "Montreal"
+        },
+        "correctOption": "option3"
+      },
+      "qh7i8j9k0": {
+        "question": "Who wrote 'To Kill a Mockingbird'?",
+        "options": {
+          "option1": "Harper Lee",
+          "option2": "Ernest Hemingway",
+          "option3": "F. Scott Fitzgerald",
+          "option4": "Mark Twain"
+        },
+        "correctOption": "option1"
+      },
+      "qi8j9k0l1": {
+        "question": "What is the capital of Australia?",
+        "options": {
+          "option1": "Sydney",
+          "option2": "Melbourne",
+          "option3": "Canberra",
+          "option4": "Brisbane"
+        },
+        "correctOption": "option3"
+      },
+      "qj9k0l1m2": {
+        "question": "Who discovered penicillin?",
+        "options": {
+          "option1": "Marie Curie",
+          "option2": "Alexander Fleming",
+          "option3": "Louis Pasteur",
+          "option4": "Gregor Mendel"
+        },
+        "correctOption": "option2"
+      },
+      "qk0l1m2n3": {
+        "question": "What is the main ingredient in guacamole?",
+        "options": {
+          "option1": "Tomato",
+          "option2": "Avocado",
+          "option3": "Onion",
+          "option4": "Pepper"
+        },
+        "correctOption": "option2"
+      },
+      "ql1m2n3o4": {
+        "question": "What is the smallest bone in the human body?",
+        "options": {
+          "option1": "Femur",
+          "option2": "Stapes",
+          "option3": "Tibia",
+          "option4": "Ulna"
+        },
+        "correctOption": "option2"
+      },
+      "qm2n3o4p5": {
+        "question": "What is the currency of Japan?",
+        "options": {
+          "option1": "Yuan",
+          "option2": "Won",
+          "option3": "Yen",
+          "option4": "Dollar"
+        },
+        "correctOption": "option3"
+      },
+      "qn3o4p5q6": {
+        "question": "Who painted 'Starry Night'?",
+        "options": {
+          "option1": "Pablo Picasso",
+          "option2": "Leonardo da Vinci",
+          "option3": "Vincent van Gogh",
+          "option4": "Claude Monet"
+        },
+        "correctOption": "option3"
+      },
+      "qo4p5q6r7": {
+        "question": "What is the tallest mountain in the world?",
+        "options": {
+          "option1": "K2",
+          "option2": "Kangchenjunga",
+          "option3": "Mount Everest",
+          "option4": "Makalu"
+        },
+        "correctOption": "option3"
+      },
+      "qp5q6r7s8": {
+        "question": "What is the hardest rock?",
+        "options": {
+          "option1": "Granite",
+          "option2": "Marble",
+          "option3": "Diamond",
+          "option4": "Quartz"
+        },
+        "correctOption": "option3"
+      },
+      "qq6r7s8t9": {
+        "question": "Who wrote 'The Odyssey'?",
+        "options": {
+          "option1": "Homer",
+          "option2": "Virgil",
+          "option3": "Sophocles",
+          "option4": "Aristotle"
+        },
+        "correctOption": "option1"
+      },
+      "qr7s8t9u0": {
+        "question": "What is the capital of China?",
+        "options": {
+          "option1": "Shanghai",
+          "option2": "Beijing",
+          "option3": "Hong Kong",
+          "option4": "Guangzhou"
+        },
+        "correctOption": "option2"
+      },
+      "qs8t9u0v1": {
+        "question": "Who developed the theory of evolution?",
+        "options": {
+          "option1": "Gregor Mendel",
+          "option2": "Alfred Russel Wallace",
+          "option3": "Charles Darwin",
+          "option4": "Jean-Baptiste Lamarck"
+        },
+        "correctOption": "option3"
+      },
+      "qt9u0v1w2": {
+        "question": "What is the chemical formula for salt?",
+        "options": {
+          "option1": "NaCl",
+          "option2": "H2O",
+          "option3": "CO2",
+          "option4": "O2"
+        },
+        "correctOption": "option1"
+      },
+      "qu0v1w2x3": {
+        "question": "What is the capital of South Korea?",
+        "options": {
+          "option1": "Tokyo",
+          "option2": "Beijing",
+          "option3": "Seoul",
+          "option4": "Bangkok"
+        },
+        "correctOption": "option3"
+      },
+      "qv1w2x3y4": {
+        "question": "Who wrote 'The Catcher in the Rye'?",
+        "options": {
+          "option1": "J.D. Salinger",
+          "option2": "F. Scott Fitzgerald",
+          "option3": "Ernest Hemingway",
+          "option4": "Mark Twain"
+        },
+        "correctOption": "option1"
+      },
+      "qw2x3y4z5": {
+        "question": "What is the capital of India?",
+        "options": {
+          "option1": "Mumbai",
+          "option2": "New Delhi",
+          "option3": "Kolkata",
+          "option4": "Chennai"
+        },
+        "correctOption": "option2"
+      },
+      "qx3y4z5a6": {
+        "question": "What is the tallest building in the world?",
+        "options": {
+          "option1": "Shanghai Tower",
+          "option2": "Burj Khalifa",
+          "option3": "Abraj Al-Bait Clock Tower",
+          "option4": "One World Trade Center"
+        },
+        "correctOption": "option2"
+      },
+      "qy4z5a6b7": {
+        "question": "Who discovered electricity?",
+        "options": {
+          "option1": "Albert Einstein",
+          "option2": "Isaac Newton",
+          "option3": "Benjamin Franklin",
+          "option4": "Nikola Tesla"
+        },
+        "correctOption": "option3"
+      },
+      "qz5a6b7c8": {
+        "question": "What is the capital of the United States?",
+        "options": {
+          "option1": "New York",
+          "option2": "Los Angeles",
+          "option3": "Washington, D.C.",
+          "option4": "Chicago"
+        },
+        "correctOption": "option3"
+      },
+      "ra6b7c8d9": {
+        "question": "Who wrote 'The Hobbit'?",
+        "options": {
+          "option1": "C.S. Lewis",
+          "option2": "J.K. Rowling",
+          "option3": "J.R.R. Tolkien",
+          "option4": "George R.R. Martin"
+        },
+        "correctOption": "option3"
+      },
+      "rb7c8d9e0": {
+        "question": "What is the chemical symbol for iron?",
+        "options": {
+          "option1": "Ir",
+          "option2": "In",
+          "option3": "Fe",
+          "option4": "F"
+        },
+        "correctOption": "option3"
+      },
+      "rc8d9e0f1": {
+        "question": "What is the tallest waterfall in the world?",
+        "options": {
+          "option1": "Angel Falls",
+          "option2": "Niagara Falls",
+          "option3": "Victoria Falls",
+          "option4": "Yosemite Falls"
+        },
+        "correctOption": "option1"
+      },
+      "rd9e0f1g2": {
+        "question": "Who developed the first successful polio vaccine?",
+        "options": {
+          "option1": "Albert Sabin",
+          "option2": "Jonas Salk",
+          "option3": "Robert Koch",
+          "option4": "Louis Pasteur"
+        },
+        "correctOption": "option2"
+      },
+      "re0f1g2h3": {
+        "question": "What is the capital of Brazil?",
+        "options": {
+          "option1": "Rio de Janeiro",
+          "option2": "São Paulo",
+          "option3": "Brasília",
+          "option4": "Salvador"
+        },
+        "correctOption": "option3"
+      },
+      "rf1g2h3i4": {
+        "question": "What is the chemical symbol for gold?",
+        "options": {
+          "option1": "Au",
+          "option2": "Ag",
+          "option3": "Pb",
+          "option4": "Fe"
+        },
+        "correctOption": "option1"
+      },
+      "rg2h3i4j5": {
+        "question": "Who wrote '1984'?",
+        "options": {
+          "option1": "George Orwell",
+          "option2": "Aldous Huxley",
+          "option3": "Ray Bradbury",
+          "option4": "Ernest Hemingway"
+        },
+        "correctOption": "option1"
+      },
+      "rh3i4j5k6": {
+        "question": "What is the largest desert in the world?",
+        "options": {
+          "option1": "Sahara",
+          "option2": "Arctic",
+          "option3": "Antarctic",
+          "option4": "Gobi"
+        },
+        "correctOption": "option3"
+      },
+      "ri4j5k6l7": {
+        "question": "What is the largest continent?",
+        "options": {
+          "option1": "Africa",
+          "option2": "Asia",
+          "option3": "Europe",
+          "option4": "Antarctica"
+        },
+        "correctOption": "option2"
+      },
+      "rj5k6l7m8": {
+        "question": "What is the main ingredient in traditional Japanese sushi?",
+        "options": {
+          "option1": "Chicken",
+          "option2": "Beef",
+          "option3": "Fish",
+          "option4": "Pork"
+        },
+        "correctOption": "option3"
+      },
+      "rk6l7m8n9": {
+        "question": "Who discovered the theory of relativity?",
+        "options": {
+          "option1": "Isaac Newton",
+          "option2": "Albert Einstein",
+          "option3": "Galileo Galilei",
+          "option4": "Stephen Hawking"
+        },
+        "correctOption": "option2"
+      },
+      "rl7m8n9o0": {
+        "question": "What is the capital of Italy?",
+        "options": {
+          "option1": "Venice",
+          "option2": "Milan",
+          "option3": "Florence",
+          "option4": "Rome"
+        },
+        "correctOption": "option4"
+      }
+    }
+  }
+  

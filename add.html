@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Question Management</title>
+  <!-- Direct link to a CDN for CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+
+        body {
+          background-color: #f8f9fa; /* Light grey background */
+          font-family: Arial, sans-serif;
+        }
+    
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        h1 {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+    
+        label {
+          font-weight: bold;
+        }
+    
+        input[type="text"], input[type="paragraph"],
+        select {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+    
+        button[type="submit"] {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          cursor: pointer;
+          border-radius: 4px;
+          display: block;
+          width: 100%;
+          font-size: 16px;
+        }
+    
+        button[type="submit"]:hover {
+          background-color: #0056b3;
+        }
+      </style>
+  </head>
+<body>
+  <div class="container">
+    <h1>Add a New Question</h1>
+    <form id="questionForm">
+      <label for="questionText">Question:</label>
+      <input type="paragraph" id="questionText" required><br><br>
+      
+      <label for="option1">Option 1:</label>
+      <input type="text" id="option1" required><br><br>
+      
+      <label for="option2">Option 2:</label>
+      <input type="text" id="option2" required><br><br>
+      
+      <label for="option3">Option 3:</label>
+      <input type="text" id="option3" required><br><br>
+      
+      <label for="option4">Option 4:</label>
+      <input type="text" id="option4" required><br><br>
+      
+      <label for="correctOption">Correct Option:</label>
+      <select id="correctOption">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+        <option value="option4">Option 4</option>
+      </select><br><br>
+      
+      <button type="submit">Add Question</button>
+    </form>
+  </div>
+
+  <!-- Include Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
+
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBd1hHYd-GmINKv0l0qwi_10udbiLsTeX0",
+        authDomain: "quizzz-998c0.firebaseapp.com",
+        projectId: "quizzz-998c0",
+        storageBucket: "quizzz-998c0.appspot.com",
+        messagingSenderId: "320059830331",
+        appId: "1:320059830331:web:221f1eebb6e363cc78ac1e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to your Firebase database
+    const database = firebase.database();
+
+    // Form submission handling
+    const questionForm = document.getElementById('questionForm');
+
+    questionForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const questionText = document.getElementById('questionText').value;
+      const option1 = document.getElementById('option1').value;
+      const option2 = document.getElementById('option2').value;
+      const option3 = document.getElementById('option3').value;
+      const option4 = document.getElementById('option4').value;
+      const correctOption = document.getElementById('correctOption').value;
+
+      // Push the new question to Firebase database under 'questions' node
+      const newQuestionRef = database.ref('questions').push();
+      newQuestionRef.set({
+        question: questionText,
+        options: {
+          option1: option1,
+          option2: option2,
+          option3: option3,
+          option4: option4
+        },
+        correctOption: correctOption
+      })
+      .then(() => {
+        console.log("Question added successfully to Firebase!");
+        // Clear the form fields
+        questionForm.reset();
+      })
+      .catch((error) => {
+        console.error("Error adding question to Firebase:", error);
+      });
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Results</title>
+  <!-- Direct link to a CDN for Bootstrap CSS for styling -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa; /* Light grey background */
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #ffffff00;
+      border-radius: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .result-item {
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .result-item h3 {
+      margin-bottom: 10px;
+      font-size: 30px;
+    }
+
+    .result-item p {
+      margin-bottom: 5px;
+      font-weight: bolder;
+    }
+
+    .result-item .btn {
+      margin-left: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Quiz Results</h1>
+    <div id="resultsContainer">
+      <!-- Results will be dynamically added here -->
+    </div>
+  </div>
+
+  <!-- Include Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
+
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd1hHYd-GmINKv0l0qwi_10udbiLsTeX0",
+      authDomain: "quizzz-998c0.firebaseapp.com",
+      projectId: "quizzz-998c0",
+      storageBucket: "quizzz-998c0.appspot.com",
+      messagingSenderId: "320059830331",
+      appId: "1:320059830331:web:221f1eebb6e363cc78ac1e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to your Firebase database
+    const database = firebase.database();
+
+    // Reference to results node
+    const resultsRef = database.ref('results');
+
+    // Function to fetch and display results
+    function fetchResults() {
+      resultsRef.once('value', function(snapshot) {
+        const resultsContainer = document.getElementById('resultsContainer');
+
+        // Clear previous results
+        resultsContainer.innerHTML = '';
+
+        // Iterate through each result
+        snapshot.forEach(function(childSnapshot) {
+          const result = childSnapshot.val();
+          const resultId = childSnapshot.key;
+
+          // Create result item element
+          const resultItem = document.createElement('div');
+          resultItem.classList.add('result-item');
+          resultItem.innerHTML = `
+            <div>
+              <h3>${result.playerName}</h3>
+              <p>Score: ${result.score}/${result.totalQuestions}</p>
+              <p>Timestamp: ${new Date(result.timestamp).toLocaleString()}</p>
+            </div>
+            <button class="btn btn-danger" onclick="deleteResult('${resultId}')">Delete</button>
+          `;
+
+          // Append result item to results container
+          resultsContainer.appendChild(resultItem);
+        });
+      }).catch(error => {
+        console.error('Error fetching results:', error);
+      });
+    }
+
+    // Function to delete a result
+    function deleteResult(resultId) {
+      if (confirm('Are you sure you want to delete this result?')) {
+        resultsRef.child(resultId).remove().then(() => {
+          alert('Result deleted successfully.');
+          fetchResults(); // Refresh results after deletion
+        }).catch(error => {
+          console.error('Error deleting result:', error);
+        });
+      }
+    }
+
+    // Load results when the page loads
+    window.onload = function() {
+      fetchResults();
+    };
+  </script>
+</body>
+</html>
